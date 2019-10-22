@@ -111,6 +111,11 @@ class Organization:
         return val
 
     @staticmethod
+    def status(og):
+        val = get_el(og, 'nsiOrganizationData', 'status')
+        return val
+
+    @staticmethod
     def phone(og):
         val = get_el(og, 'nsiOrganizationData', 'contactInfo', 'phone')
         return val
@@ -205,6 +210,7 @@ def parser_o(org, path):
     contact_name = Organization.contact_name(org)
     okato = Organization.okato(org)
     oktmo = Organization.oktmo(org)
+    status = Organization.status(org)
     con = connect_bd(DB)
     cur = con.cursor()
     cur.execute(f"""SELECT id FROM od_customer{SUFFIX} WHERE ogrn=%s""", (ogrn,))
@@ -212,20 +218,20 @@ def parser_o(org, path):
     if res_code:
         query = f"""UPDATE od_customer{SUFFIX} SET regNumber=%s, 	inn=%s, kpp=%s, contracts_count=%s, contracts223_count=%s,
                 contracts_sum=%s, contracts223_sum=%s, region_code=%s, full_name=%s, short_name=%s, postal_address=%s, 
-                phone=%s, fax=%s, email=%s, contact_name=%s, code=%s, okato=%s, oktmo=%s WHERE ogrn=%s"""
+                phone=%s, fax=%s, email=%s, contact_name=%s, code=%s, okato=%s, oktmo=%s, status = %s WHERE ogrn=%s"""
         value = (regNumber, inn, kpp, contracts_count, contracts223_count, contracts_sum, contracts223_sum,
                  region_code, full_name, short_name, postal_address, phone, fax, email, contact_name, code, okato,
-                 oktmo, ogrn)
+                 oktmo, status, ogrn)
         cur.execute(query, value)
         Organization.log_update += 1
     else:
         query1 = f"""INSERT INTO od_customer{SUFFIX} SET regNumber=%s, inn=%s, kpp=%s, contracts_count=%s, 
                 contracts223_count=%s,
                 contracts_sum=%s, contracts223_sum=%s, ogrn=%s, region_code=%s, full_name=%s, short_name=%s, postal_address=%s, 
-                phone=%s, fax=%s, email=%s, contact_name=%s, code=%s, okato=%s, oktmo=%s"""
+                phone=%s, fax=%s, email=%s, contact_name=%s, code=%s, okato=%s, oktmo=%s, status = %s"""
         value1 = (regNumber, inn, kpp, contracts_count, contracts223_count, contracts_sum, contracts223_sum, ogrn,
                   region_code, full_name, short_name, postal_address, phone, fax, email, contact_name, code, okato,
-                  oktmo)
+                  oktmo, status)
         cur.execute(query1, value1)
         Organization.log_insert += 1
     cur.close()
