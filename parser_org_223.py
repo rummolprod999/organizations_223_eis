@@ -1,10 +1,12 @@
 import datetime
 import logging
 import operator
+import os
 from functools import reduce
 from warnings import filterwarnings
+
 import pymysql
-import os
+
 from connect_to_db import connect_bd
 
 EXECUTE_PATH = os.path.dirname(os.path.abspath(__file__))

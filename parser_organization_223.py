@@ -6,10 +6,11 @@ import shutil
 import sys
 import time
 import zipfile
-import xmltodict
+
 import timeout_decorator
+import xmltodict
+
 import parser_org_223
-from connect_to_db import connect_bd
 
 file_log = parser_org_223.file_log
 temp_dir = parser_org_223.TEMP_DIR
