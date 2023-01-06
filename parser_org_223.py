@@ -155,6 +155,15 @@ class Organization:
         return val
 
     @staticmethod
+    def factual_address(og):
+        val = get_el(og, 'nsiOrganizationData', 'mainInfo', 'legalAddress')
+        return val
+
+    @staticmethod
+    def resp_role(og):
+        return ''
+
+    @staticmethod
     def query_in_customer(inn, kpp):
         con = connect_bd(DB)
         cur = con.cursor()
@@ -213,6 +222,8 @@ def parser_o(org, path):
     okato = Organization.okato(org)
     oktmo = Organization.oktmo(org)
     status = Organization.status(org)
+    factual_address = Organization.factual_address(org)
+    resp_role = Organization.resp_role(org)
     con = connect_bd(DB)
     cur = con.cursor()
     cur.execute(f"""SELECT id FROM od_customer{SUFFIX} WHERE ogrn=%s""", (ogrn,))
@@ -236,6 +247,20 @@ def parser_o(org, path):
                   oktmo, status)
         cur.execute(query1, value1)
         Organization.log_insert += 1
+    cur.execute(f"""SELECT * FROM organizer WHERE inn = %s  AND kpp = %s""", (inn, kpp))
+    resinn = cur.fetchone()
+    if not resinn:
+        query4 = f"""INSERT INTO organizer SET reg_num = %s, full_name = %s, post_address = %s, fact_address = %s, inn = %s, kpp = %s, 
+            responsible_role = %s, contact_person = %s, contact_email = %s, contact_phone = %s, contact_fax = %s"""
+        value4 = (
+            regNumber, full_name, postal_address, factual_address, inn, kpp, resp_role, contact_name, email, phone, fax)
+        cur.execute(query4, value4)
+    else:
+        query4 = f"""UPDATE organizer SET reg_num = %s, full_name = %s, post_address = %s, fact_address = %s, 
+                    responsible_role = %s, contact_person = %s, contact_email = %s, contact_phone = %s, contact_fax = %s WHERE inn = %s AND kpp = %s"""
+        value4 = (
+            regNumber, full_name, postal_address, factual_address, resp_role, contact_name, email, phone, fax, inn, kpp)
+        cur.execute(query4, value4)
     cur.close()
     con.close()
 
