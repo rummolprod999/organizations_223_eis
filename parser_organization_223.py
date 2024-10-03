@@ -47,7 +47,7 @@ def bolter(file, l_dir):
 def down_timeout(m, path_parse1):
     host = 'ftp.zakupki.gov.ru'
     ftpuser = 'fz223free'
-    password = 'fz223free'
+    password = 'otkluchenie_FTP_s_01_01_2025_podrobnee_v_ATFF'
     ftp2 = ftplib.FTP(host)
     ftp2.set_debuglevel(0)
     ftp2.encoding = 'utf8'
@@ -119,7 +119,7 @@ def extract_org(m, path_parse1):
 def get_list_ftp_last(path_parse):
     host = 'ftp.zakupki.gov.ru'
     ftpuser = 'fz223free'
-    password = 'fz223free'
+    password = 'otkluchenie_FTP_s_01_01_2025_podrobnee_v_ATFF'
     ftp2 = ftplib.FTP(host)
     ftp2.set_debuglevel(0)
     ftp2.encoding = 'utf8'
@@ -141,7 +141,7 @@ def get_list_ftp_last(path_parse):
 def get_list_ftp_daily(path_parse):
     host = 'ftp.zakupki.gov.ru'
     ftpuser = 'fz223free'
-    password = 'fz223free'
+    password = 'otkluchenie_FTP_s_01_01_2025_podrobnee_v_ATFF'
     ftp2 = ftplib.FTP(host)
     ftp2.set_debuglevel(0)
     ftp2.encoding = 'utf8'
