@@ -67,7 +67,7 @@ class Organization:
 
     def get_org(self):
         try:
-            orgs = generator_univ(self.org['nsiOrganization']['body']['item'])
+            orgs = generator_univ(self.org['nsiCustomer']['body']['item'])
         except Exception:
             orgs = []
         return orgs
@@ -78,85 +78,75 @@ class Organization:
         return val
 
     @staticmethod
-    def code(og):
-        val = get_el(og, 'nsiOrganizationData', 'code')
-        return val
-
-    @staticmethod
     def inn(og):
-        val = get_el(og, 'nsiOrganizationData', 'mainInfo', 'inn')
+        val = get_el(og, 'customerRegistryData', 'customerRegistryMainInfo', 'inn')
         return val
 
     @staticmethod
     def kpp(og):
-        val = get_el(og, 'nsiOrganizationData', 'mainInfo', 'kpp')
+        val = get_el(og, 'customerRegistryData', 'customerRegistryMainInfo', 'kpp')
         return val
 
     @staticmethod
     def ogrn(og):
-        val = get_el(og, 'nsiOrganizationData', 'mainInfo', 'ogrn')
+        val = get_el(og, 'customerRegistryData', 'customerRegistryMainInfo', 'ogrn')
         return val
 
     @staticmethod
     def full_name(og):
-        val = get_el(og, 'nsiOrganizationData', 'mainInfo', 'fullName')
+        val = get_el(og, 'customerRegistryData', 'customerRegistryMainInfo', 'fullName')
         return val
 
     @staticmethod
     def short_name(og):
-        val = get_el(og, 'nsiOrganizationData', 'mainInfo', 'shortName')
+        val = get_el(og, 'customerRegistryData', 'customerRegistryMainInfo', 'shortName')
         return val
 
     @staticmethod
     def postal_address(og):
-        val = get_el(og, 'nsiOrganizationData', 'mainInfo', 'postalAddress')
+        val = get_el(og, 'customerRegistryData', 'customerRegistryMainInfo', 'postalAddress')
         return val
 
     @staticmethod
     def status(og):
-        val = get_el(og, 'nsiOrganizationData', 'status')
+        val = get_el(og, 'customerRegistryData', 'registryStatus')
         return val
 
     @staticmethod
     def phone(og):
-        val = get_el(og, 'nsiOrganizationData', 'contactInfo', 'phone')
+        val = get_el(og, 'customerRegistryData', 'contactInfo', 'phone')
         return val
 
     @staticmethod
     def fax(og):
-        val = get_el(og, 'nsiOrganizationData', 'contactInfo', 'fax')
+        val = get_el(og, 'customerRegistryData', 'contactInfo', 'fax')
         return val
 
     @staticmethod
     def email(og):
-        val = get_el(og, 'nsiOrganizationData', 'contactInfo', 'email')
-        return val
-
-    @staticmethod
-    def email(og):
-        val = get_el(og, 'nsiOrganizationData', 'contactInfo', 'email')
+        val = get_el(og, 'customerRegistryData', 'contactInfo', 'email')
         return val
 
     @staticmethod
     def contact_name(og):
-        lastName = get_el(og, 'nsiOrganizationData', 'contactInfo', 'contactLastName')
-        firstName = get_el(og, 'nsiOrganizationData', 'contactInfo', 'contactFirstName')
-        middleName = get_el(og, 'nsiOrganizationData', 'contactInfo', 'contactMiddleName')
+        lastName = get_el(og, 'customerRegistryData', 'contactInfo', 'lastName')
+        firstName = get_el(og, 'customerRegistryData', 'contactInfo', 'firstName')
+        middleName = get_el(og, 'customerRegistryData', 'contactInfo', 'middleName')
         return '{0} {1} {2}'.format(firstName, middleName, lastName)
 
     @staticmethod
     def okato(og):
-        val = get_el(og, 'nsiOrganizationData', 'classification', 'okato')
+        val = get_el(og, 'customerRegistryData', 'classification', 'okato')
         return val
 
     @staticmethod
     def oktmo(og):
-        val = get_el(og, 'nsiOrganizationData', 'classification', 'oktmo')
+        val = get_el(og, 'customerRegistryData', 'classification', 'oktmo')
         return val
 
     @staticmethod
     def factual_address(og):
-        val = get_el(og, 'nsiOrganizationData', 'mainInfo', 'legalAddress')
+        val = get_el(og, 'customerRegistryData', 'customerRegistryMainInfo', 'legalAddress')
         return val
 
     @staticmethod
